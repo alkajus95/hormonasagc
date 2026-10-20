@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Las Hormonas - Física Orgánica</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================================
+           CONFIGURACIÓN GLOBAL Y SCROLL SNAPPING
+           ========================================================= */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: #0f172a;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .scroll-container {
+            height: 100vh;
+            width: 100vw;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .slide {
+            scroll-snap-align: start;
+            min-height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* =========================================================
+           SECCIÓN 1: JULIÁN (ESTÉTICA DESTRUIDA - CSS PURO)
+           ========================================================= */
+        #slide1 {
+            background-color: #FF00FF !important; /* Magenta chillón */
+            color: #39FF14 !important; /* Verde neón */
+            font-family: "Comic Sans MS", "Comic Sans", cursive !important;
+            padding: 20px;
+            box-sizing: border-box;
+            display: block;
+        }
+
+        #slide1 h1 {
+            font-size: 50px !important;
+            text-align: center !important;
+            text-decoration: underline overline !important;
+            border: 10px dotted yellow !important;
+            background-color: blue !important;
+            margin: 10px 0 !important;
+            padding: 10px !important;
+        }
+
+        #slide1 marquee {
+            font-size: 30px !important;
+            background-color: red !important;
+            color: white !important;
+            padding: 5px !important;
+        }
+
+        #slide1 table {
+            width: 90% !important;
+            margin: 20px auto !important;
+            border: 15px ridge cyan !important;
+            background-color: black !important;
+        }
+
+        #slide1 th, #slide1 td {
+            border: 5px dashed orange !important;
+            padding: 15px !important;
+            text-align: right !important; /* Desalineado a propósito */
+            font-size: 22px !important;
+        }
+
+        #slide1 .blinking-text {
+            animation: feo-blink 0.1s infinite !important;
+            font-size: 40px !important;
+            color: yellow !important;
+        }
+
+        @keyframes feo-blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; color: white; }
+            100% { opacity: 1; }
+        }
+
+        #slide1 p {
+            font-size: 24px !important;
+            line-height: 1.1 !important;
+            border: 3px solid white !important;
+            padding: 5px !important;
+        }
+
+        #slide1 ul {
+            list-style-type: square !important;
+            font-size: 26px !important;
+        }
+
+        /* =========================================================
+           SECCIONES 2, 3 Y 4: ULTRAMODERNO
+           ========================================================= */
+        .modern-bg {
+            background: radial-gradient(circle at top right, #1e293b 0%, #0f172a 100%);
+            color: #f8fafc;
+        }
+
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-purple {
+            background: linear-gradient(135deg, #c084fc 0%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Estilos del Juego */
+        .game-btn {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .game-btn:hover {
+            background: rgba(51, 65, 85, 0.9);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .game-btn.selected {
+            border-color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+            background: rgba(56, 189, 248, 0.15);
+            color: white;
+        }
+        
+        .game-btn.matched {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+            color: #34d399;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+            pointer-events: none;
+        }
+        
+        .game-btn.error {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+            color: #fca5a5;
+            animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-2px, 0, 0); }
+            20%, 80% { transform: translate3d(4px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+            40%, 60% { transform: translate3d(6px, 0, 0); }
+        }
+
+        .scroll-content-container {
+            height: calc(100vh - 60px); /* Deja espacio para el footer */
+            overflow-y: auto;
+            padding-bottom: 40px;
+        }
+        
+        /* Ocultar barra de scroll interna en los paneles modernos para estética */
+        .scroll-content-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        .scroll-content-container::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1); 
+        }
+        .scroll-content-container::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2); 
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scroll-container">
+
+        <!-- =================================================================
+             SECCIÓN 1: JULIÁN (INTRODUCCIÓN FEA)
+             ================================================================= -->
+        <section class="slide" id="slide1">
+            <marquee direction="right" scrollamount="20">!!! BIENVENIDOS A LA PRESENTACION DE JULIAN !!!</marquee>
+            
+            <h1>L4S HORMONAS Y EL CUERPO</h1>
+            
+            <p class="blinking-text">*** CONCEPTOS BASICOS ***</p>
+
+            <p>
+                Las hormonas son mensajeros químicos del cuerpo humano. Viajan por el torrente sanguíneo hacia los tejidos y órganos. Surten su efecto lentamente y, con el tiempo, afectan muchos procesos distintos, incluyendo el crecimiento y el metabolismo.
+            </p>
+
+            <table border="1">
+                <tr>
+                    <th>Glandulas Endocrinas</th>
+                    <th>Glandulas Exocrinas</th>
+                </tr>
+                <tr>
+                    <td>Secretan hormonas directo a la sangre.</td>
+                    <td>Liberan secreciones a través de conductos.</td>
+                </tr>
+                <tr>
+                    <td>Ejemplos: Tiroides, Hipófisis, Glándulas Suprarrenales.</td>
+                    <td>Ejemplos: Sudoríparas, Salivales, Sebáceas.</td>
+                </tr>
+                <tr>
+                    <td>Acción a larga distancia y sostenida.</td>
+                    <td>Acción local y rápida.</td>
+                </tr>
+            </table>
+
+            <h2>¿Que es la HOMEOSTASIS?</h2>
+            <ul>
+                <li>Es el estado de equilibrio dinámico del cuerpo.</li>
+                <li>Funciona mediante mecanismos de "retroalimentación negativa".</li>
+                <li>Si la glucosa sube, el cuerpo produce insulina para bajarla. Si baja mucho, produce glucagón.</li>
+                <li>Sin homeostasis, los sistemas colapsan (enfermedad).</li>
+            </ul>
+
+            <marquee direction="up" scrollamount="15" style="height: 150px; text-align: center;">
+                BAJEN A LA SIGUIENTE DIAPOSITIVA PARA VER LA FISICA ORGANICA<br><br>
+                EXPOSITOR: ALEJANDRO
+            </marquee>
+        </section>
+
+
+        <!-- =================================================================
+             SECCIÓN 2: ALEJANDRO (FÍSICA ORGÁNICA)
+             ================================================================= -->
+        <section class="slide modern-bg relative" id="slide2">
+            <div class="scroll-content-container px-8 py-16 md:px-24">
+                
+                <div class="inline-block px-4 py-1 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 text-sm font-bold tracking-wider mb-6">
+                    MÓDULO II: ALEJANDRO
+                </div>
+                
+                <h2 class="text-4xl md:text-6xl font-extrabold mb-4 text-gradient tracking-tight">Física Orgánica de las Hormonas</h2>
+                <p class="text-xl text-slate-400 mb-12 max-w-4xl leading-relaxed">
+                    Análisis estructural y termodinámico de los mensajeros químicos. La clasificación molecular determina el mecanismo físico de interacción celular.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    
+                    <!-- Hormonas Peptídicas -->
+                    <div class="glass-card p-8 rounded-2xl">
+                        <div class="w-12 h-12 rounded-lg bg-sky-500/20 flex items-center justify-center mb-6 border border-sky-500/30">
+                            <svg class="w-6 h-6 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Hormonas Peptídicas</h3>
+                        <ul class="space-y-3 text-slate-300">
+                            <li class="flex items-start"><span class="text-sky-400 mr-2">▹</span> <b>Estructura:</b> Cadenas polipeptídicas de aminoácidos unidos por enlaces peptídicos.</li>
+                            <li class="flex items-start"><span class="text-sky-400 mr-2">▹</span> <b>Física Molecular:</b> Son moléculas polares (hidrofílicas). Sufren repulsión electrostática al contacto con las colas apolares de la bicapa lipídica celular.</li>
+                            <li class="flex items-start"><span class="text-sky-400 mr-2">▹</span> <b>Mecanismo:</b> Imposibilitadas para cruzar la membrana, se acoplan a receptores de superficie celular, activando segundos mensajeros (ej. AMPc) para la transducción de señales.</li>
+                            <li class="flex items-start"><span class="text-sky-400 mr-2">▹</span> <b>Ejemplos Clínicos:</b> Insulina (regulación glucémica), Adrenalina (catecolamina de acción rápida).</li>
+                        </ul>
+                    </div>
+
+                    <!-- Hormonas Esteroideas -->
+                    <div class="glass-card p-8 rounded-2xl">
+                        <div class="w-12 h-12 rounded-lg bg-indigo-500/20 flex items-center justify-center mb-6 border border-indigo-500/30">
+                            <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Hormonas Esteroideas</h3>
+                        <ul class="space-y-3 text-slate-300">
+                            <li class="flex items-start"><span class="text-indigo-400 mr-2">▹</span> <b>Estructura Base:</b> Derivadas del colesterol (ciclopentanoperhidrofenantreno), compuesto por cuatro anillos de carbono fusionados.</li>
+                            <li class="flex items-start"><span class="text-indigo-400 mr-2">▹</span> <b>Física Molecular:</b> Altamente lipofílicas (apolares). Poseen un coeficiente de partición lípido/agua elevado, permitiendo la difusión pasiva a través de membranas plasmáticas.</li>
+                            <li class="flex items-start"><span class="text-indigo-400 mr-2">▹</span> <b>Mecanismo:</b> Atraviesan la célula y se unen a receptores citosólicos o nucleares, actuando directamente como factores de transcripción genética en el ADN.</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Termodinámica -->
+                <div class="glassmorphism p-8 rounded-2xl border-l-4 border-l-sky-500">
+                    <h3 class="text-xl font-bold text-white mb-2">Termodinámica del Acoplamiento Ligando-Receptor</h3>
+                    <p class="text-slate-300 font-mono text-lg mb-2">ΔG = ΔH - TΔS <span class="text-sm text-slate-500 ml-4">// Ecuación de Energía Libre de Gibbs</span></p>
+                    <p class="text-slate-400">La eficacia del sistema endocrino depende de un ΔG negativo. La formación de puentes de hidrógeno y fuerzas de Van der Waals (ΔH negativo) entre la hormona y su receptor específico supera la pérdida de entropía (ΔS) conformacional. Este acoplamiento exergónico induce el cambio alostérico en el receptor, disparando la respuesta biológica.</p>
+                </div>
+
+            </div>
+            
+            <div class="absolute bottom-4 left-0 w-full text-center text-slate-500 text-xs md:text-sm tracking-[0.2em] font-light uppercase">
+                Colegio del Sagrado Corazón | 11B - Promoción 2026
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             SECCIÓN 3: SAMUEL (MADURACIÓN SEXUAL)
+             ================================================================= -->
+        <section class="slide modern-bg relative" id="slide3">
+            <div class="scroll-content-container px-8 py-16 md:px-24">
+                
+                <div class="inline-block px-4 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-sm font-bold tracking-wider mb-6">
+                    MÓDULO III: SAMUEL
+                </div>
+                
+                <h2 class="text-4xl md:text-6xl font-extrabold mb-4 text-gradient-purple tracking-tight">Biología Molecular y Maduración Sexual</h2>
+                <p class="text-xl text-slate-400 mb-10 max-w-4xl leading-relaxed">
+                    La transición a la madurez fisiológica es un evento orquestado genéticamente, detonado por concentraciones umbrales de moléculas esteroideas específicas y mediado por el Eje H-P-G.
+                </p>
+
+                <!-- El Eje H-P-G -->
+                <div class="glassmorphism p-8 rounded-2xl mb-8">
+                    <h3 class="text-2xl font-bold text-white mb-4 border-b border-white/10 pb-2">El Eje Hipotálamo-Hipófisis-Gónadas (H-P-G)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                        <div>
+                            <span class="block text-purple-400 font-bold mb-2">1. Hipotálamo</span>
+                            <p class="text-slate-300 text-sm">Inicia la pubertad liberando pulsos de GnRH (Hormona Liberadora de Gonadotropinas) tras superar el umbral inhibitorio infantil.</p>
+                        </div>
+                        <div>
+                            <span class="block text-purple-400 font-bold mb-2">2. Hipófisis Anterior</span>
+                            <p class="text-slate-300 text-sm">Responde a la GnRH sintetizando LH (Luteinizante) y FSH (Foliculoestimulante), secretándolas al torrente sanguíneo sistémico.</p>
+                        </div>
+                        <div>
+                            <span class="block text-purple-400 font-bold mb-2">3. Gónadas (Testículos/Ovarios)</span>
+                            <p class="text-slate-300 text-sm">Receptan LH/FSH y catalizan la biosíntesis masiva de hormonas esteroideas sexuales (Andrógenos y Estrógenos).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- Testosterona -->
+                    <div class="glass-card p-8 rounded-2xl border-t-4 border-t-blue-500">
+                        <h3 class="text-2xl font-bold text-blue-400 mb-4">Testosterona (Andrógenos)</h3>
+                        <p class="text-slate-300 text-sm mb-4 border-l-2 border-blue-500/50 pl-3">Estructura química con 19 átomos de carbono (C19). Esterol de base.</p>
+                        <ul class="space-y-2 text-slate-400 text-sm">
+                            <li>• <b>Penetración Nuclear:</b> Difunde a través de la carioteca celular.</li>
+                            <li>• <b>Unión a HRE:</b> El complejo receptor-andrógeno se une a los Elementos de Respuesta a Hormonas en el ADN.</li>
+                            <li>• <b>Efecto Fenotípico:</b> Regula al alza la transcripción de ARNm para la hipertrofia de fibras musculares (miogénesis), incremento de la densidad ósea y desarrollo de vello androgénico.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Estradiol -->
+                    <div class="glass-card p-8 rounded-2xl border-t-4 border-t-pink-500">
+                        <h3 class="text-2xl font-bold text-pink-400 mb-4">Estradiol (Estrógenos)</h3>
+                        <p class="text-slate-300 text-sm mb-4 border-l-2 border-pink-500/50 pl-3">Sintetizado a partir de testosterona vía la enzima <i>aromatasa</i>. Posee un anillo A aromático y un grupo hidroxilo fenólico.</p>
+                        <ul class="space-y-2 text-slate-400 text-sm">
+                            <li>• <b>Afinidad de Receptor (ERα/ERβ):</b> El grupo hidroxilo forma puentes de hidrógeno críticos en el dominio de unión del receptor estrogénico.</li>
+                            <li>• <b>Efecto Fenotípico:</b> Induce proliferación celular en el endometrio, redistribución de adipocitos (tejido mamario) y ensanchamiento de la estructura ósea pélvica para viabilidad reproductiva.</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+            
+            <div class="absolute bottom-4 left-0 w-full text-center text-slate-500 text-xs md:text-sm tracking-[0.2em] font-light uppercase">
+                Colegio del Sagrado Corazón | 11B - Promoción 2026
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             SECCIÓN 4: JUEGO INTERACTIVO
+             ================================================================= -->
+        <section class="slide modern-bg relative flex flex-col justify-center" id="slide4">
+            <div class="scroll-content-container px-6 py-12 md:px-20 flex flex-col justify-center w-full max-w-7xl mx-auto">
+                
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Simulación de Acoplamiento Receptor-Ligando</h2>
+                    <p class="text-lg text-slate-400 font-light max-w-2xl mx-auto">
+                        Establezca el emparejamiento correcto basándose en la especificidad molecular y la función fisiológica correspondiente.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 w-full">
+                    
+                    <!-- Columna de Hormonas (Ligandos) -->
+                    <div class="glassmorphism p-6 md:p-8 rounded-3xl h-full flex flex-col">
+                        <h3 class="text-xl font-bold text-sky-400 mb-6 uppercase tracking-widest border-b border-sky-400/20 pb-4 text-center">
+                            Ligando (Hormona)
+                        </h3>
+                        <div class="space-y-4 flex-grow flex flex-col justify-center" id="col-hormonas">
+                            <!-- Generado dinámicamente por JS -->
+                        </div>
+                    </div>
+
+                    <!-- Columna de Efectos (Funciones) -->
+                    <div class="glassmorphism p-6 md:p-8 rounded-3xl h-full flex flex-col">
+                        <h3 class="text-xl font-bold text-indigo-400 mb-6 uppercase tracking-widest border-b border-indigo-400/20 pb-4 text-center">
+                            Respuesta Biológica (Efecto)
+                        </h3>
+                        <div class="space-y-4 flex-grow flex flex-col justify-center" id="col-efectos">
+                            <!-- Generado dinámicamente por JS -->
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div id="game-status" class="mt-8 text-center text-2xl font-bold h-10 transition-all duration-300 flex items-center justify-center"></div>
+
+            </div>
+
+            <div class="absolute bottom-4 left-0 w-full text-center text-slate-500 text-xs md:text-sm tracking-[0.2em] font-light uppercase">
+                Colegio del Sagrado Corazón | 11B - Promoción 2026
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Script del Juego Interactivo -->
+    <script>
+        const gamePairs = [
+            { id: 1, hormona: "Insulina", efecto: "Incrementa la permeabilidad celular a la glucosa y reduce la glucemia plasmática." },
+            { id: 2, hormona: "Adrenalina", efecto: "Desencadena respuesta simpática inmediata: taquicardia y vasoconstricción periférica." },
+            { id: 3, hormona: "Testosterona", efecto: "Se une a receptores androgénicos activando la transcripción para la miogénesis y osteogénesis." },
+            { id: 4, hormona: "Estradiol", efecto: "Induce la maduración folicular, desarrollo mamario y ensanchamiento de la estructura ósea pélvica." }
+        ];
+
+        let selectedHormone = null;
+        let selectedEffect = null;
+        let matchedCount = 0;
+
+        function shuffleArray(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        function initGame() {
+            const colHormonas = document.getElementById('col-hormonas');
+            const colEfectos = document.getElementById('col-efectos');
+            
+            colHormonas.innerHTML = '';
+            colEfectos.innerHTML = '';
+            matchedCount = 0;
+            document.getElementById('game-status').innerHTML = '';
+
+            const mixedHormones = shuffleArray([...gamePairs]);
+            const mixedEffects = shuffleArray([...gamePairs]);
+
+            mixedHormones.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = 'game-btn w-full p-5 md:p-6 rounded-xl text-left font-bold text-lg outline-none';
+                btn.innerHTML = `<span class="tracking-wide">${item.hormona}</span>`;
+                btn.onclick = () => selectItem(btn, 'hormona', item.id);
+                colHormonas.appendChild(btn);
+            });
+
+            mixedEffects.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = 'game-btn w-full p-4 md:p-5 rounded-xl text-left font-medium text-sm md:text-base outline-none leading-relaxed';
+                btn.innerText = item.efecto;
+                btn.onclick = () => selectItem(btn, 'efecto', item.id);
+                colEfectos.appendChild(btn);
+            });
+        }
+
+        function selectItem(btn, type, id) {
+            if (btn.classList.contains('matched')) return;
+
+            const statusLabel = document.getElementById('game-status');
+            statusLabel.innerHTML = '';
+
+            if (type === 'hormona') {
+                if (selectedHormone) selectedHormone.node.classList.remove('selected');
+                selectedHormone = { node: btn, id: id };
+                btn.classList.add('selected');
+            } else {
+                if (selectedEffect) selectedEffect.node.classList.remove('selected');
+                selectedEffect = { node: btn, id: id };
+                btn.classList.add('selected');
+            }
+
+            if (selectedHormone && selectedEffect) {
+                verifyMatch();
+            }
+        }
+
+        function verifyMatch() {
+            const nodeH = selectedHormone.node;
+            const nodeE = selectedEffect.node;
+            const statusLabel = document.getElementById('game-status');
+
+            if (selectedHormone.id === selectedEffect.id) {
+                // Éxito Termodinámico
+                nodeH.classList.remove('selected');
+                nodeE.classList.remove('selected');
+                nodeH.classList.add('matched');
+                nodeE.classList.add('matched');
+                
+                statusLabel.innerHTML = '<span class="text-emerald-400 drop-shadow-md">✓ Acoplamiento Termodinámico Estable (ΔG < 0)</span>';
+                matchedCount++;
+
+                if (matchedCount === gamePairs.length) {
+                    setTimeout(() => {
+                        statusLabel.innerHTML = '<span class="text-sky-400 text-3xl animate-pulse">¡SIMULACIÓN COMPLETADA CON ÉXITO!</span>';
+                    }, 600);
+                }
+            } else {
+                // Fallo
+                nodeH.classList.remove('selected');
+                nodeE.classList.remove('selected');
+                nodeH.classList.add('error');
+                nodeE.classList.add('error');
+                
+                statusLabel.innerHTML = '<span class="text-red-500 drop-shadow-md">✗ Incompatibilidad Molecular y de Receptores</span>';
+
+                setTimeout(() => {
+                    nodeH.classList.remove('error');
+                    nodeE.classList.remove('error');
+                    if(matchedCount < gamePairs.length) {
+                        statusLabel.innerHTML = '';
+                    }
+                }, 800);
+            }
+
+            selectedHormone = null;
+            selectedEffect = null;
+        }
+
+        // Inicializar el juego al cargar
+        document.addEventListener('DOMContentLoaded', initGame);
+    </script>
+</body>
+</html>
