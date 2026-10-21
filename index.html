@@ -144,6 +144,42 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        .moleculas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .molecula-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #334155;
+            transition: transform 0.3s;
+        }
+
+        .molecula-card:hover {
+            transform: scale(1.05);
+            border-color: #38bdf8;
+        }
+
+        .molecula-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+            background: white; /* Fondo blanco para que se vean bien las estructuras químicas */
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .molecula-card h3 {
+            color: #a78bfa;
+            margin: 0 0 10px 0;
+        }
 
         /* Estilos del Juego */
         .game-btn {
@@ -304,6 +340,26 @@
                     </div>
 
                 </div>
+                <div class="moleculas-grid">
+                <div class="molecula-card">
+                    <h3>Adrenalina</h3>
+                    <!-- Imagen de Wikipedia de la Adrenalina -->
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Epinephrine_structure.svg/512px-Epinephrine_structure.svg.png" alt="Estructura Adrenalina">
+                    <p style="font-size: 14px; color: #94a3b8;">Derivada de la tirosina. Muy pequeña para dispersarse en milisegundos en situaciones de peligro.</p>
+                </div>
+                <div class="molecula-card">
+                    <h3>Insulina</h3>
+                    <!-- Imagen de Wikipedia de la Insulina (estructura 3D) -->
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/InsulinHexamer.jpg/512px-InsulinHexamer.jpg" alt="Estructura Insulina">
+                    <p style="font-size: 14px; color: #94a3b8;">Proteína compleja dependiente de puentes disulfuro. Si se rompen, la molécula pierde su forma 3D.</p>
+                </div>
+                <div class="molecula-card">
+                    <h3>Oxitocina</h3>
+                    <!-- Imagen de Wikipedia de la Oxitocina -->
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Oxytocin_with_labels.png/512px-Oxytocin_with_labels.png" alt="Estructura Oxitocina">
+                    <p style="font-size: 14px; color: #94a3b8;">Geometría de anillo cerrado. Encaja perfectamente en los receptores neuronales.</p>
+                </div>
+            </div>
 
                 <!-- Termodinámica -->
                 
